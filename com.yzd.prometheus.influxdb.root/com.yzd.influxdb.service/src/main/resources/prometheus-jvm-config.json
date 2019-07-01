@@ -1,0 +1,17 @@
+[{
+  "name": "uptime",
+  "pattern": "process_uptime_seconds",
+  "value": ""
+}, {
+  "name": "system.cpu.usage",
+  "pattern": "system_cpu_usage",
+  "value": ""
+}, {
+  "name": "jvm.threads.live",
+  "pattern": "jvm_threads_live",
+  "value": ""
+}, {
+  "name": "jvm.threads.daemon",
+  "pattern": "jvm_threads_daemon",
+  "value": ""
+}]
