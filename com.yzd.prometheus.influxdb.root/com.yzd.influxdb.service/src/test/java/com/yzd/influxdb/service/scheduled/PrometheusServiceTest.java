@@ -62,13 +62,14 @@ public class PrometheusServiceTest {
     public void readConfig() {
         List<Metrics> itemList=new ArrayList<>();
         //在线时长
-        itemList.add(new Metrics("uptime","process_uptime_seconds","在线时长"));
+        itemList.add(new Metrics("process_uptime_seconds","process_uptime_seconds","在线时长"));
         //CPU使用率
-        itemList.add(new Metrics("system.cpu.usage","system_cpu_usage","CPU使用率"));
+        itemList.add(new Metrics("system_cpu_usage","system_cpu_usage","CPU使用率"));
         //实时线程
-        itemList.add(new Metrics("jvm.threads.live","jvm_threads_live","实时线程"));
+        itemList.add(new Metrics("jvm_threads_live","jvm_threads_live","实时线程"));
         //守护线程
-        itemList.add(new Metrics("jvm.threads.daemon","jvm_threads_daemon","守护线程"));
+        itemList.add(new Metrics("jvm_threads_daemon","jvm_threads_daemon","守护线程"));
+        itemList.add(new Metrics("process_start_time_seconds","process_start_time_seconds","启动时间"));
         //itemList.add(new Metrics("uptime","process_uptime_seconds",""));
         //itemList.add(new Metrics("uptime","process_uptime_seconds",""));
         String json=FastJsonUtil.serialize(itemList);

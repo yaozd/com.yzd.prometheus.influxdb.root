@@ -1,17 +1,17 @@
 [{
   "description": "在线时长",
-  "name": "uptime",
+  "name": "process_uptime_seconds",
   "pattern": "process_uptime_seconds"
 }, {
   "description": "CPU使用率",
-  "name": "system.cpu.usage",
+  "name": "system_cpu_usage",
   "pattern": "system_cpu_usage"
 }, {
   "description": "实时线程",
-  "name": "jvm.threads.live",
+  "name": "jvm_threads_live",
   "pattern": "jvm_threads_live"
 }, {
   "description": "守护线程",
-  "name": "jvm.threads.daemon",
+  "name": "jvm_threads_daemon",
   "pattern": "jvm_threads_daemon"
 }]

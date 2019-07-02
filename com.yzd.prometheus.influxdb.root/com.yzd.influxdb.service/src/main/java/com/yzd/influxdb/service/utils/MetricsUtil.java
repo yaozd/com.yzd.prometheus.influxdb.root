@@ -54,24 +54,41 @@ public class MetricsUtil {
             return null;
         }
         String numStr = RegExUtil.fetchStr("[\\d\\.E]+$", metrics);
-        log.info(numStr);
+        log.debug(numStr);
         boolean isNum = NumberUtils.isCreatable(numStr);
-        log.info(String.valueOf(isNum));
+        log.debug(String.valueOf(isNum));
         if (BooleanUtils.isNotTrue(isNum)) {
             return null;
         }
         //Prometheus JVM_Export的数据大部分是科学计数据：2.7262976E7 显示：27262976
         BigDecimal decimalVal = NumberUtils.createBigDecimal(numStr);
-        log.info("number.BigDecimal()=" + decimalVal.toPlainString());
+        log.debug("number.BigDecimal()=" + decimalVal.toPlainString());
         return decimalVal.toPlainString();
     }
-
     public static List<Metrics> readMetricsConfig() {
+        List<Metrics> itemList=new ArrayList<>();
+        itemList.add(new Metrics("process_uptime_seconds","process_uptime_seconds","在线时长"));
+        itemList.add(new Metrics("system_cpu_usage","system_cpu_usage","CPU使用率"));
+        itemList.add(new Metrics("jvm_threads_live","jvm_threads_live","实时线程"));
+        itemList.add(new Metrics("jvm_threads_daemon","jvm_threads_daemon","守护线程"));
+        itemList.add(new Metrics("process_start_time_seconds","process_start_time_seconds","启动时间"));
+        itemList.add(new Metrics("heap_memory_used_survivor","jvm_memory_used_bytes{area=\"heap\",id=\"PS Survivor Space\",}","survivor区-已使用内存"));
+        itemList.add(new Metrics("heap_memory_used_eden","jvm_memory_used_bytes{area=\"heap\",id=\"PS Eden Space\",}","eden区-已使用内存"));
+        itemList.add(new Metrics("heap_memory_used_old","jvm_memory_used_bytes{area=\"heap\",id=\"PS Old Gen\",}","old区-已使用内存"));
+        itemList.add(new Metrics("heap_memory_max_survivor","jvm_memory_max_bytes{area=\"heap\",id=\"PS Survivor Space\",}","survivor区-最大内存"));
+        itemList.add(new Metrics("heap_memory_max_eden","jvm_memory_max_bytes{area=\"heap\",id=\"PS Eden Space\",}","eden区-最大内存"));
+        itemList.add(new Metrics("heap_memory_max_old","jvm_memory_max_bytes{area=\"heap\",id=\"PS Old Gen\",}","old区-最大内存"));
+        itemList.add(new Metrics("noheap_memory_used_metaspace","jvm_memory_used_bytes{area=\"nonheap\",id=\"Metaspace\",}","metaspace区-已使用内存"));
+        itemList.add(new Metrics("noheap_memory_used_code_cache","jvm_memory_used_bytes{area=\"nonheap\",id=\"Code Cache\",}","code_cache区-已使用内存"));
+        itemList.add(new Metrics("noheap_memory_used_compressed","jvm_memory_used_bytes{area=\"nonheap\",id=\"Compressed Class Space\",}","compressed区-已使用内存"));
+        itemList.add(new Metrics("noheap_memory_max_metaspace","jvm_memory_max_bytes{area=\"nonheap\",id=\"Metaspace\",}","metaspace区-最大内存"));
+        itemList.add(new Metrics("noheap_memory_max_code_cache","jvm_memory_max_bytes{area=\"nonheap\",id=\"Code Cache\",}","code_cache区-最大内存"));
+        itemList.add(new Metrics("noheap_memory_max_compressed","jvm_memory_max_bytes{area=\"nonheap\",id=\"Compressed Class Space\",}","compressed区-最大内存"));
+        return itemList;
+    }
+    /*public static List<Metrics> readMetricsConfig() {
         FileReader fileReader = new FileReader("prometheus-jvm-config.json");
         String result = fileReader.readString();
         return FastJsonUtil.deserializeList(result,Metrics.class);
-        //List<Metrics> itemList=new ArrayList<>();
-        //itemList.add(new Metrics("uptime","process_uptime_seconds",""));
-        //return itemList;
-    }
+    }*/
 }
