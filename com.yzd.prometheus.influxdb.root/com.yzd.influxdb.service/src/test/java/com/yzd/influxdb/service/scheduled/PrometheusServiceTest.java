@@ -42,7 +42,10 @@ public class PrometheusServiceTest {
     @Test
     public void writeMetrics() {
         String url = "http://localhost:8080";
-        ServiceInfo serviceInfo=new ServiceInfo("yzd-1",url,"");
+        ServiceInfo serviceInfo=new ServiceInfo();
+        serviceInfo.setName("yzd-1");
+        serviceInfo.setUrl(url);
+        //
         List<Metrics> itemList4MetricsEntity= prometheusService.getMetrics(serviceInfo.getUrl());
         HashMap<String,String> tags = new HashMap<>() ;
         tags.put("service.name",serviceInfo.getName()) ;
@@ -59,13 +62,13 @@ public class PrometheusServiceTest {
     public void readConfig() {
         List<Metrics> itemList=new ArrayList<>();
         //在线时长
-        itemList.add(new Metrics("uptime","process_uptime_seconds",""));
+        itemList.add(new Metrics("uptime","process_uptime_seconds","在线时长"));
         //CPU使用率
-        itemList.add(new Metrics("system.cpu.usage","system_cpu_usage",""));
+        itemList.add(new Metrics("system.cpu.usage","system_cpu_usage","CPU使用率"));
         //实时线程
-        itemList.add(new Metrics("jvm.threads.live","jvm_threads_live",""));
+        itemList.add(new Metrics("jvm.threads.live","jvm_threads_live","实时线程"));
         //守护线程
-        itemList.add(new Metrics("jvm.threads.daemon","jvm_threads_daemon",""));
+        itemList.add(new Metrics("jvm.threads.daemon","jvm_threads_daemon","守护线程"));
         //itemList.add(new Metrics("uptime","process_uptime_seconds",""));
         //itemList.add(new Metrics("uptime","process_uptime_seconds",""));
         String json=FastJsonUtil.serialize(itemList);

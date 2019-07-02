@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class ServiceInfo {
     String name;
     String url;
+    String ip;
     String description;
 }
