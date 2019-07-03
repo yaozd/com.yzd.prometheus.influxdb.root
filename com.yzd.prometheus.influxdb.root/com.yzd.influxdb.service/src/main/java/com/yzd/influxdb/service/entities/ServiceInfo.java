@@ -11,5 +11,7 @@ public class ServiceInfo {
     String name;
     String url;
     String ip;
+    String instance;
+    String application;
     String description;
 }

@@ -37,7 +37,7 @@ public class PrometheusServiceTest {
     }
 
     /**
-     *
+     * 写入指标
      */
     @Test
     public void writeMetrics() {
@@ -46,14 +46,7 @@ public class PrometheusServiceTest {
         serviceInfo.setName("yzd-1");
         serviceInfo.setUrl(url);
         //
-        List<Metrics> itemList4MetricsEntity= prometheusService.getMetrics(serviceInfo.getUrl());
-        HashMap<String,String> tags = new HashMap<>() ;
-        tags.put("service.name",serviceInfo.getName()) ;
-        HashMap<String,Object> fields = new HashMap<>();
-        for(Metrics item:itemList4MetricsEntity){
-            fields.put(item.getName(),Double.parseDouble(item.getValue()));
-        }
-        iInfluxDbService.writeMetrics(tags,fields);
+        prometheusService.writeMetrics(serviceInfo);
     }
     /**
      * 读取与创建配置文件

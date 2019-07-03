@@ -40,3 +40,32 @@
  简单来说堆就是Java代码可及的内存，是留给开发人员使用的；
  非堆就是JVM留给 自己用的，所以方法区、JVM内部处理或优化所需的内存(如JIT编译后的代码缓存)、每个类结构(如运行时常数池、字段和方法数据)以及方法和构造方法 的代码都在非堆内存中。
  ```
+ 
+ > **MinorGC、MajorGC、FullGC差异**
+ 
+- [MinorGC、MajorGC、FullGC差异](https://www.jianshu.com/p/8b6a2d8e8f48)
+```
+Minor GC ，Full GC 触发条件
+分代：
+Minor GC:清理新生代
+Major GC 是清理永久代
+Full GC 是清理整个堆，包括新生代和老年代
+触发条件：
+Minor GC触发条件：当新生代无法为新生对象分配内存空间的时候，会触发Minor GC，比如Eden区满了会触发一次
+Major GC触发条件：回收老年代，通常至少经历过一次Minor GC
+Full GC触发条件：
+（1）调用System.gc时，系统建议执行Full GC，但是不必然执行
+（2）老年代空间不足
+（3）方法区空间不足
+（4）通过Minor GC后进入老年代的平均大小大于老年代的可用内存
+（5）由Eden区、From Space区向To Space区复制时，对象大小大于To Space可用内存，则把该对象转存到老年代，且老年代的可用内存小于该对象大小
+```
+
+> **GC(Allocation Failure)引发的一些JVM知识点梳理**
+
+- [GC(Allocation Failure)引发的一些JVM知识点梳理](https://blog.csdn.net/zc19921215/article/details/83029952)
+```
+频繁GC (Allocation Failure)及young gc时间过长分析
+Allocation Failure：
+表明本次引起GC的原因是因为在年轻代中没有足够的空间能够存储新的数据了。
+```
