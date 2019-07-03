@@ -72,18 +72,27 @@ public class MetricsUtil {
         itemList.add(new Metrics("jvm_threads_live","jvm_threads_live","实时线程"));
         itemList.add(new Metrics("jvm_threads_daemon","jvm_threads_daemon","守护线程"));
         itemList.add(new Metrics("process_start_time_seconds","process_start_time_seconds","启动时间"));
+        //
         itemList.add(new Metrics("heap_memory_used_survivor","jvm_memory_used_bytes{area=\"heap\",id=\"PS Survivor Space\",}","survivor区-已使用内存"));
         itemList.add(new Metrics("heap_memory_used_eden","jvm_memory_used_bytes{area=\"heap\",id=\"PS Eden Space\",}","eden区-已使用内存"));
         itemList.add(new Metrics("heap_memory_used_old","jvm_memory_used_bytes{area=\"heap\",id=\"PS Old Gen\",}","old区-已使用内存"));
         itemList.add(new Metrics("heap_memory_max_survivor","jvm_memory_max_bytes{area=\"heap\",id=\"PS Survivor Space\",}","survivor区-最大内存"));
         itemList.add(new Metrics("heap_memory_max_eden","jvm_memory_max_bytes{area=\"heap\",id=\"PS Eden Space\",}","eden区-最大内存"));
         itemList.add(new Metrics("heap_memory_max_old","jvm_memory_max_bytes{area=\"heap\",id=\"PS Old Gen\",}","old区-最大内存"));
+        itemList.add(new Metrics("heap_memory_committed_survivor","jvm_memory_committed_bytes{area=\"heap\",id=\"PS Survivor Space\",}","survivor区-可用内存"));
+        itemList.add(new Metrics("heap_memory_committed_eden","jvm_memory_committed_bytes{area=\"heap\",id=\"PS Eden Space\",}","eden区-可用内存"));
+        itemList.add(new Metrics("heap_memory_committed_old","jvm_memory_committed_bytes{area=\"heap\",id=\"PS Old Gen\",}","old区-可用内存"));
+        //
         itemList.add(new Metrics("noheap_memory_used_metaspace","jvm_memory_used_bytes{area=\"nonheap\",id=\"Metaspace\",}","metaspace区-已使用内存"));
         itemList.add(new Metrics("noheap_memory_used_code_cache","jvm_memory_used_bytes{area=\"nonheap\",id=\"Code Cache\",}","code_cache区-已使用内存"));
         itemList.add(new Metrics("noheap_memory_used_compressed","jvm_memory_used_bytes{area=\"nonheap\",id=\"Compressed Class Space\",}","compressed区-已使用内存"));
         itemList.add(new Metrics("noheap_memory_max_metaspace","jvm_memory_max_bytes{area=\"nonheap\",id=\"Metaspace\",}","metaspace区-最大内存"));
         itemList.add(new Metrics("noheap_memory_max_code_cache","jvm_memory_max_bytes{area=\"nonheap\",id=\"Code Cache\",}","code_cache区-最大内存"));
         itemList.add(new Metrics("noheap_memory_max_compressed","jvm_memory_max_bytes{area=\"nonheap\",id=\"Compressed Class Space\",}","compressed区-最大内存"));
+        itemList.add(new Metrics("noheap_memory_committed_metaspace","jvm_memory_committed_bytes{area=\"nonheap\",id=\"Metaspace\",}","metaspace区-可用内存"));
+        itemList.add(new Metrics("noheap_memory_committed_code_cache","jvm_memory_committed_bytes{area=\"nonheap\",id=\"Code Cache\",}","code_cache区-可用内存"));
+        itemList.add(new Metrics("noheap_memory_committed_compressed","jvm_memory_committed_bytes{area=\"nonheap\",id=\"Compressed Class Space\",}","compressed区-可用内存"));
+        //
         return itemList;
     }
     /*public static List<Metrics> readMetricsConfig() {
