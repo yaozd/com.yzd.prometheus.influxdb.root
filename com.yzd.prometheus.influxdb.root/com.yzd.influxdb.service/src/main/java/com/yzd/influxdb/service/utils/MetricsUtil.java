@@ -74,8 +74,8 @@ public class MetricsUtil {
         itemList.add(new Metrics("process_cpu_usage","process_cpu_usage","当前进程的CPU使用率"));
         //CLASS-类
         itemList.add(new Metrics("jvm_classes_loaded_classes","jvm_classes_loaded_classes","类-已装入"));
-        itemList.add(new Metrics("jvm_classes_unloaded_classes_total","jvm_classes_loaded_classes","类-已卸载"));
-        //
+        itemList.add(new Metrics("jvm_classes_unloaded_classes_total","jvm_classes_unloaded_classes_total","类-已卸载"));
+        //thread
         itemList.add(new Metrics("jvm_threads_peak_threads","jvm_threads_peak_threads","线程峰值"));
         itemList.add(new Metrics("jvm_threads_live","jvm_threads_live","实时线程"));
         itemList.add(new Metrics("jvm_threads_daemon","jvm_threads_daemon","守护线程"));
@@ -116,7 +116,12 @@ public class MetricsUtil {
         //tomcat
 
         //logback
-
+        itemList.add(new Metrics("logback_total_warn","logback_events_total{level=\"warn\",}","logback-warn"));
+        itemList.add(new Metrics("logback_total_debug","logback_events_total{level=\"debug\",}","logback-debug"));
+        itemList.add(new Metrics("logback_total_error","logback_events_total{level=\"error\",}","logback-error"));
+        itemList.add(new Metrics("logback_total_trace","logback_events_total{level=\"trace\",}","logback-trace"));
+        itemList.add(new Metrics("logback_total_info","logback_events_total{level=\"info\",}","logback-info"));
+        //
         return itemList;
     }
     /*public static List<Metrics> readMetricsConfig() {
