@@ -70,6 +70,7 @@ public class MetricsUtil {
         itemList.add(new Metrics("process_uptime_seconds","process_uptime_seconds","在线时长"));
         itemList.add(new Metrics("process_start_time_seconds","process_start_time_seconds","启动时间"));
         //
+        itemList.add(new Metrics("system_cpu_count","system_cpu_count","CPU数量"));
         itemList.add(new Metrics("system_cpu_usage","system_cpu_usage","CPU使用率"));
         itemList.add(new Metrics("process_cpu_usage","process_cpu_usage","当前进程的CPU使用率"));
         //CLASS-类

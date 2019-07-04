@@ -5,6 +5,7 @@ import cn.hutool.core.io.resource.ClassPathResource;
 import com.yzd.influxdb.service.entities.Metrics;
 import com.yzd.influxdb.service.entities.ServiceInfo;
 import com.yzd.influxdb.service.influxdb.IInfluxDbService;
+import com.yzd.influxdb.service.startup.Application4UnitTest;
 import com.yzd.influxdb.service.utils.FastJsonUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
+@SpringBootTest(classes = Application4UnitTest.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class PrometheusServiceTest {
 
     @Autowired
