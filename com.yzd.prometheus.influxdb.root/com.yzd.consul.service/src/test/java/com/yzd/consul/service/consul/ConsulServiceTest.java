@@ -28,7 +28,7 @@ public class ConsulServiceTest {
         String ip = "127.0.0.1";
         Integer port = 8080;
         Long interval = 3l;
-        serviceInfo = ServiceInfo.builder()
+        serviceInfo = ServiceInfo.newBuilder()
                 .name(name)
                 .ip(ip)
                 .port(port)

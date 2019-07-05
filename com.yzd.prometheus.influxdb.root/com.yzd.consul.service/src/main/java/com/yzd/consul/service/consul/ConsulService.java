@@ -81,7 +81,7 @@ public class ConsulService implements IConsulService {
             log.info(item.getService().toString());
             log.info(item.toString());
             com.orbitz.consul.model.health.Service item4Service = item.getService();
-            list4ServiceInfo.add(ServiceInfo.builder()
+            list4ServiceInfo.add(ServiceInfo.newBuilder()
                     .name(item4Service.getService())
                     .ip(item4Service.getAddress())
                     .port(item4Service.getPort())
@@ -124,7 +124,7 @@ public class ConsulService implements IConsulService {
                 continue;
             }
             com.orbitz.consul.model.health.Service item4Service = entry.getValue();
-            list4ServiceInfo.add(ServiceInfo.builder()
+            list4ServiceInfo.add(ServiceInfo.newBuilder()
                     .name(item4Service.getService())
                     .ip(item4Service.getAddress())
                     .port(item4Service.getPort())

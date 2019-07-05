@@ -4,6 +4,7 @@ import com.yzd.consul.common.entities.ServiceInfo;
 import com.yzd.consul.service.consul.IConsulService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +16,13 @@ import java.util.List;
 public class ConsulController {
     @Autowired
     IConsulService consulService;
+
+    @RequestMapping("add")
+    public String add(@RequestBody ServiceInfo serviceInfo) {
+        log.info("add");
+        consulService.add(serviceInfo);
+        return "ok";
+    }
 
     @RequestMapping("getAllHealthyServiceByServiceName")
     public List<ServiceInfo> getAllHealthyServiceByServiceName(String serviceTag) {
