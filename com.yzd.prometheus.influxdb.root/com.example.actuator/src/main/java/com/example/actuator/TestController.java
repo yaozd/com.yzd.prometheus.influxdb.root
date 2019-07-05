@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("test")
 public class TestController {
     @RequestMapping("logInfo")
-    public String logInfo(){
+    public String logInfo() {
         log.info("logInfo");
         return "logInfo";
     }
+
     @RequestMapping("logError")
-    public String logError(){
+    public String logError() {
         log.error("logError");
         return "logError";
     }

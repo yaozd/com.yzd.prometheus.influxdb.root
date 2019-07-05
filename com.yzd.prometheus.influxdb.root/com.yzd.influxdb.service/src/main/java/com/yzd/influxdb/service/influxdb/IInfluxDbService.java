@@ -7,5 +7,5 @@ import java.util.HashMap;
  */
 public interface IInfluxDbService {
 
-    public void writeMetrics(HashMap<String, String> tags, HashMap<String, Object> fields) ;
+    public void writeMetrics(HashMap<String, String> tags, HashMap<String, Object> fields);
 }

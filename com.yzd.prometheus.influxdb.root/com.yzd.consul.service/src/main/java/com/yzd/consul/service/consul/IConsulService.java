@@ -1,6 +1,8 @@
 package com.yzd.consul.service.consul;
 
-import com.yzd.consul.service.entities.ServiceInfo;
+import com.yzd.consul.common.entities.ServiceInfo;
+
+import java.util.List;
 
 public interface IConsulService {
     void add(ServiceInfo serviceInfo);
@@ -9,13 +11,15 @@ public interface IConsulService {
 
     /**
      * 通过服务名称找到健康的服务
+     *
      * @param serviceName
      */
-    void getAllHealthyServiceByServiceName(String serviceName);
+    List<ServiceInfo> getAllHealthyServiceByServiceName(String serviceName);
 
     /**
      * 通过服务标签找到健康的服务
+     *
      * @param serviceTag
      */
-    void getAllHealthyServiceByServiceTag(String serviceTag);
+    List<ServiceInfo> getAllHealthyServiceByServiceTag(String serviceTag);
 }

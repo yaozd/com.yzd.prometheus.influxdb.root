@@ -1,7 +1,8 @@
 package com.yzd.consul.service.consul;
 
-import com.yzd.consul.service.entities.MonitorType;
-import com.yzd.consul.service.entities.ServiceInfo;
+import com.yzd.consul.common.entities.MonitorType;
+import com.yzd.consul.common.entities.ServiceInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import startup.Application4Consul;
 
+import java.util.List;
+
+@Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application4Consul.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class ConsulServiceTest {
@@ -17,6 +21,7 @@ public class ConsulServiceTest {
     @Autowired
     IConsulService consulService;
     ServiceInfo serviceInfo;
+
     @Before
     public void init() {
         String name = "com.example.actuator";
@@ -40,10 +45,13 @@ public class ConsulServiceTest {
 
     @Test
     public void getAllHealthyServiceByServiceName() {
-        consulService.getAllHealthyServiceByServiceName(serviceInfo.getName());
+        List<ServiceInfo> list4ServiceInfo = consulService.getAllHealthyServiceByServiceName(serviceInfo.getName());
+        log.info(list4ServiceInfo.toString());
     }
+
     @Test
     public void getAllHealthyServiceByServiceTag() {
-        consulService.getAllHealthyServiceByServiceTag(MonitorType.M_JVM.name());
+        List<ServiceInfo> list4ServiceInfo = consulService.getAllHealthyServiceByServiceTag(MonitorType.M_JVM.name());
+        log.info(list4ServiceInfo.toString());
     }
 }

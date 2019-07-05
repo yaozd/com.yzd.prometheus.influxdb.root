@@ -8,12 +8,13 @@ import com.orbitz.consul.model.agent.ImmutableRegistration;
 import com.orbitz.consul.model.agent.Registration;
 import com.orbitz.consul.model.health.HealthCheck;
 import com.orbitz.consul.model.health.ServiceHealth;
-import com.yzd.consul.service.entities.ServiceInfo;
+import com.yzd.consul.common.entities.ServiceInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +66,9 @@ public class ConsulService implements IConsulService {
     }
 
     @Override
-    public void getAllHealthyServiceByServiceName(String serviceName) {
+    public List<ServiceInfo> getAllHealthyServiceByServiceName(String serviceName) {
+        List<ServiceInfo> list4ServiceInfo = new ArrayList<>();
+        //
         HealthClient healthClient = client.healthClient();
         // Discover only "passing" nodes
         //List<ServiceHealth> nodes = healthClient.getHealthyServiceInstances("prometheus-etcd").getResponse();
@@ -75,15 +78,29 @@ public class ConsulService implements IConsulService {
         //https://github.com/prometheus/jmx_exporter
         List<ServiceHealth> nodes = healthClient.getHealthyServiceInstances(serviceName).getResponse();
         for (ServiceHealth item : nodes) {
-            System.out.println(item.getService());
-            System.out.println(item);
+            log.info(item.getService().toString());
+            log.info(item.toString());
+            com.orbitz.consul.model.health.Service item4Service = item.getService();
+            list4ServiceInfo.add(ServiceInfo.builder()
+                    .name(item4Service.getService())
+                    .ip(item4Service.getAddress())
+                    .port(item4Service.getPort())
+                    .build());
         }
+
+        return list4ServiceInfo;
     }
 
     @Override
-    public void getAllHealthyServiceByServiceTag(String serviceTag) {
-        Map<String, HealthCheck> serviceMap = client.agentClient().getChecks();
-        for (Map.Entry<String, HealthCheck> entry : serviceMap.entrySet()) {
+    public List<ServiceInfo> getAllHealthyServiceByServiceTag(String serviceTag) {
+        List<ServiceInfo> list4ServiceInfo = new ArrayList<>();
+        Map<String, com.orbitz.consul.model.health.Service> serviceMap = client.agentClient().getServices();
+        if (serviceMap.isEmpty()) {
+            return list4ServiceInfo;
+        }
+        List<String> list4ServiceId4Pass = new ArrayList<>();
+        Map<String, HealthCheck> serviceHealthCheckMap = client.agentClient().getChecks();
+        for (Map.Entry<String, HealthCheck> entry : serviceHealthCheckMap.entrySet()) {
             HealthCheck item4HealthCheck = entry.getValue();
             String serviceName = item4HealthCheck.getServiceName().get();
             String serviceId = item4HealthCheck.getServiceId().get();
@@ -97,6 +114,22 @@ public class ConsulService implements IConsulService {
                 continue;
             }
             log.info("服务名称 :{}/服务ID:{},健康状态值：{}", serviceName, serviceId, status);
+            list4ServiceId4Pass.add(serviceId);
         }
+        if (list4ServiceId4Pass.isEmpty()) {
+            return list4ServiceInfo;
+        }
+        for (Map.Entry<String, com.orbitz.consul.model.health.Service> entry : serviceMap.entrySet()) {
+            if (!list4ServiceId4Pass.contains(entry.getKey())) {
+                continue;
+            }
+            com.orbitz.consul.model.health.Service item4Service = entry.getValue();
+            list4ServiceInfo.add(ServiceInfo.builder()
+                    .name(item4Service.getService())
+                    .ip(item4Service.getAddress())
+                    .port(item4Service.getPort())
+                    .build());
+        }
+        return list4ServiceInfo;
     }
 }

@@ -24,8 +24,8 @@ public class PrometheusServiceImpl implements PrometheusService {
         List<String> itemList4MetricsResponse = MetricsUtil.getMetricsList(metricsResponse);
         List<Metrics> itemList4MetricsEntity = MetricsUtil.readMetricsConfig();
         for (Metrics item : itemList4MetricsEntity) {
-            String metricsStr=itemList4MetricsResponse.stream().filter(m->m.contains(item.getPattern())).findFirst().orElse(null);
-            if(metricsStr==null){
+            String metricsStr = itemList4MetricsResponse.stream().filter(m -> m.contains(item.getPattern())).findFirst().orElse(null);
+            if (metricsStr == null) {
                 continue;
             }
             item.setValue(MetricsUtil.getNumber(metricsStr));
@@ -35,13 +35,13 @@ public class PrometheusServiceImpl implements PrometheusService {
 
     @Override
     public void writeMetrics(ServiceInfo serviceInfo) {
-        List<Metrics> itemList4MetricsEntity= getMetrics(serviceInfo.getUrl());
-        HashMap<String,String> tags = new HashMap<>() ;
-        tags.put("service.name",serviceInfo.getName()) ;
-        HashMap<String,Object> fields = new HashMap<>();
-        for(Metrics item:itemList4MetricsEntity){
-            fields.put(item.getName(),Double.parseDouble(item.getValue()));
+        List<Metrics> itemList4MetricsEntity = getMetrics(serviceInfo.getUrl());
+        HashMap<String, String> tags = new HashMap<>();
+        tags.put("service.name", serviceInfo.getName());
+        HashMap<String, Object> fields = new HashMap<>();
+        for (Metrics item : itemList4MetricsEntity) {
+            fields.put(item.getName(), Double.parseDouble(item.getValue()));
         }
-        iInfluxDbService.writeMetrics(tags,fields);
+        iInfluxDbService.writeMetrics(tags, fields);
     }
 }

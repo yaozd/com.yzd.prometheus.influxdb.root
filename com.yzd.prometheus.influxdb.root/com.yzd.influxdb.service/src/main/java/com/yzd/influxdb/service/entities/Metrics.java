@@ -11,11 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Metrics {
-    public Metrics(String name,String pattern,String description){
-        this.name=name;
-        this.pattern=pattern;
-        this.description=description;
+    public Metrics(String name, String pattern, String description) {
+        this.name = name;
+        this.pattern = pattern;
+        this.description = description;
     }
+
     private String name;
     private String pattern;
     private String value;

@@ -1,8 +1,7 @@
-package com.yzd.consul.service.entities;
+package com.yzd.consul.common.entities;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Builder
@@ -15,7 +14,8 @@ public class ServiceInfo {
     private String tag;
     private String checkUrl;
     private Long checkInterval;
-    public String getId(){
-        return this.name+"-"+this.ip;
+
+    public String getId() {
+        return this.name + "-" + this.ip;
     }
 }

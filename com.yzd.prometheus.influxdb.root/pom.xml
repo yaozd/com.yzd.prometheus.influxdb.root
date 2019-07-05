@@ -12,6 +12,7 @@
         <module>com.yzd.influxdb.service</module>
         <module>com.example.actuator</module>
         <module>com.yzd.consul.service</module>
+        <module>com.yzd.consul.common</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

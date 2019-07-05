@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface PrometheusService {
     List<Metrics> getMetrics(String url);
+
     void writeMetrics(ServiceInfo serviceInfo);
 }

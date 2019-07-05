@@ -43,5 +43,6 @@ public class ActuatorSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**")
                 .authenticated()
                 .and()
-                .httpBasic();    }
+                .httpBasic();
+    }
 }

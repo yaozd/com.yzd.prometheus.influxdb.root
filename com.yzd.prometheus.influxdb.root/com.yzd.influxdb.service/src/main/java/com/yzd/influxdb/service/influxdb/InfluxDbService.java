@@ -21,38 +21,39 @@ import java.util.concurrent.TimeUnit;
  */
 
 @Service
-public class InfluxDbService implements IInfluxDbService{
+public class InfluxDbService implements IInfluxDbService {
 
     @Value("${infludb.server.host}")
-    private String host ;
+    private String host;
 
     @Value("${infludb.server.port}")
-    private String port ;
+    private String port;
 
     @Value("${infludb.server.dbname}")
-    private String dbname ;
+    private String dbname;
 
     @Value("${infludb.server.username}")
-    private String username ;
+    private String username;
 
     @Value("${infludb.server.password}")
-    private String password ;
+    private String password;
 
     @Value("${infludb.server.retentionPolicy}")
-    private String retentionPolicy ;
+    private String retentionPolicy;
 
-    InfluxDB influxDB ;
+    InfluxDB influxDB;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
-    public InfluxDbService() { }
+    public InfluxDbService() {
+    }
 
 
     @PostConstruct
-    public void initConnection(){
-        logger.info("Initializing connection with influxdb http://"+host+":"+port+"?dbname="+dbname);
-        influxDB = InfluxDBFactory.connect("http://"+host+":"+port, username, password);
+    public void initConnection() {
+        logger.info("Initializing connection with influxdb http://" + host + ":" + port + "?dbname=" + dbname);
+        influxDB = InfluxDBFactory.connect("http://" + host + ":" + port, username, password);
         influxDB.createDatabase(dbname);
         influxDB.setDatabase(dbname);
         influxDB.setRetentionPolicy(retentionPolicy);
@@ -60,7 +61,7 @@ public class InfluxDbService implements IInfluxDbService{
     }
 
     @Override
-    public void writeMetrics(HashMap<String, String> tags, HashMap<String, Object> fields){
+    public void writeMetrics(HashMap<String, String> tags, HashMap<String, Object> fields) {
         BatchPoints batchPoints = BatchPoints
                 .database(dbname)
                 .consistency(InfluxDB.ConsistencyLevel.ALL)
@@ -75,26 +76,26 @@ public class InfluxDbService implements IInfluxDbService{
         influxDB.write(batchPoints);
     }
 
-    private String getTags(HashMap<String, String> tags){
-        String tags_ = "" ;
+    private String getTags(HashMap<String, String> tags) {
+        String tags_ = "";
         Set set = tags.entrySet();
         Iterator iterator = set.iterator();
-        while(iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry)iterator.next();
-            tags_ = tags_ + " " + mentry.getKey()+ ": " + mentry.getValue() ;
+        while (iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            tags_ = tags_ + " " + mentry.getKey() + ": " + mentry.getValue();
         }
-        return tags_ ;
+        return tags_;
     }
 
-    private String getFields(HashMap<String, Object> fields){
-        String fields_ = "" ;
+    private String getFields(HashMap<String, Object> fields) {
+        String fields_ = "";
         Set set = fields.entrySet();
         Iterator iterator = set.iterator();
-        while(iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry)iterator.next();
-            fields_ = fields_ + " " + mentry.getKey()+ ": " + mentry.getValue() ;
+        while (iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            fields_ = fields_ + " " + mentry.getKey() + ": " + mentry.getValue();
         }
-        return fields_ ;
+        return fields_;
     }
 
 
