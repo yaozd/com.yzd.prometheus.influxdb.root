@@ -72,7 +72,8 @@ public class MetricsUtil {
         //
         itemList.add(new Metrics("system_cpu_count", "system_cpu_count", "CPU数量"));
         itemList.add(new Metrics("system_cpu_usage", "system_cpu_usage", "CPU使用率"));
-        itemList.add(new Metrics("process_cpu_usage", "process_cpu_usage", "当前进程的CPU使用率"));
+        //Java虚拟机进程的“最近的cpu使用率”
+        itemList.add(new Metrics("process_cpu_usage", "process_cpu_usage", "Java虚拟机进程的“最近的cpu使用率"));
         //CLASS-类
         itemList.add(new Metrics("jvm_classes_loaded_classes", "jvm_classes_loaded_classes", "类-已装入"));
         itemList.add(new Metrics("jvm_classes_unloaded_classes_total", "jvm_classes_unloaded_classes_total", "类-已卸载"));

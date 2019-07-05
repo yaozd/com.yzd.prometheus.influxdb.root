@@ -1,8 +1,9 @@
 package com.yzd.influxdb.service.scheduled;
 
 import cn.hutool.core.io.file.FileReader;
+import com.yzd.consul.common.entities.ServiceInfo;
+import com.yzd.influxdb.service.entities.ApplicationInfo;
 import com.yzd.influxdb.service.entities.Metrics;
-import com.yzd.influxdb.service.entities.ServiceInfo;
 import com.yzd.influxdb.service.influxdb.IInfluxDbService;
 import com.yzd.influxdb.service.startup.Application4UnitTest;
 import com.yzd.influxdb.service.utils.FastJsonUtil;
@@ -39,12 +40,9 @@ public class PrometheusServiceTest {
      */
     @Test
     public void writeMetrics() {
-        String url = "http://localhost:8080";
-        ServiceInfo serviceInfo = new ServiceInfo();
-        serviceInfo.setName("yzd-1");
-        serviceInfo.setUrl(url);
+        ApplicationInfo applicationInfo=ApplicationInfo.toApplicationInfo("com.example.actuator","192.168.1.188",8080,"M_JVM");
         //
-        prometheusService.writeMetrics(serviceInfo);
+        prometheusService.writeMetrics(applicationInfo);
     }
 
     /**

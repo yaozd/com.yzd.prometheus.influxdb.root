@@ -1,7 +1,7 @@
 package com.yzd.influxdb.service.scheduled;
 
+import com.yzd.influxdb.service.entities.ApplicationInfo;
 import com.yzd.influxdb.service.entities.Metrics;
-import com.yzd.influxdb.service.entities.ServiceInfo;
 import com.yzd.influxdb.service.influxdb.IInfluxDbService;
 import com.yzd.influxdb.service.restclient.IRestClient;
 import com.yzd.influxdb.service.utils.MetricsUtil;
@@ -34,10 +34,11 @@ public class PrometheusServiceImpl implements PrometheusService {
     }
 
     @Override
-    public void writeMetrics(ServiceInfo serviceInfo) {
-        List<Metrics> itemList4MetricsEntity = getMetrics(serviceInfo.getUrl());
+    public void writeMetrics(ApplicationInfo applicationInfo) {
+        List<Metrics> itemList4MetricsEntity = getMetrics(applicationInfo.getUrl());
         HashMap<String, String> tags = new HashMap<>();
-        tags.put("service.name", serviceInfo.getName());
+        tags.put("application_id", applicationInfo.getId());
+        tags.put("application_name", applicationInfo.getName());
         HashMap<String, Object> fields = new HashMap<>();
         for (Metrics item : itemList4MetricsEntity) {
             fields.put(item.getName(), Double.parseDouble(item.getValue()));

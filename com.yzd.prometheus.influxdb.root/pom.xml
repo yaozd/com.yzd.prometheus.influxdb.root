@@ -25,6 +25,15 @@
         <version>2.1.3.RELEASE</version>
         <relativePath/>
     </parent>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.yzd</groupId>
+                <artifactId>com.yzd.consul.common</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
