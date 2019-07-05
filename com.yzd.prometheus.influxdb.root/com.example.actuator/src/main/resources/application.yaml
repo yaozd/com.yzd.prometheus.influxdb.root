@@ -1,3 +1,4 @@
+server.port: 8080
 management:
   endpoints:
     web:
@@ -15,6 +16,8 @@ info:
     encoding: @project.build.sourceEncoding@
     java:
       version: @java.version@
+  consul:
+    url: http://127.0.0.1:27680
 
 spring:
   security:

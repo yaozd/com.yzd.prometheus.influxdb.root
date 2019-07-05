@@ -24,6 +24,22 @@ public class ConsulClientImpl implements IConsulClientInf {
 
     @Override
     public String add(ServiceInfo serviceInfo) {
-        return HttpUtil.post(url + "/consul/add", FastJsonUtil.serialize(serviceInfo));
+        try{
+            return HttpUtil.post(url + "/consul/add", FastJsonUtil.serialize(serviceInfo));
+        }catch (Exception ex){
+            throw new IllegalStateException("Consul服务注册失败【ConsulClientImpl】:",ex);
+        }
+    }
+
+    @Override
+    public String delete(String serviceId) {
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("serviceId", serviceId);
+        try{
+            return HttpUtil.post(url + "/consul/delete",paramMap);
+        }catch (Exception ex){
+            throw new IllegalStateException("Consul服务取消失败【ConsulClientImpl】:",ex);
+        }
+
     }
 }

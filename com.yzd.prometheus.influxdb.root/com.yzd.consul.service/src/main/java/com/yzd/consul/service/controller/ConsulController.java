@@ -19,11 +19,16 @@ public class ConsulController {
 
     @RequestMapping("add")
     public String add(@RequestBody ServiceInfo serviceInfo) {
-        log.info("add");
+        log.info("add(注册服务)");
         consulService.add(serviceInfo);
         return "ok";
     }
-
+    @RequestMapping("delete")
+    public String delete(String serviceId) {
+        log.info("delete(取消服务)");
+        consulService.delete(serviceId);
+        return "ok";
+    }
     @RequestMapping("getAllHealthyServiceByServiceName")
     public List<ServiceInfo> getAllHealthyServiceByServiceName(String serviceTag) {
         log.info("getAllHealthyServiceByServiceName");

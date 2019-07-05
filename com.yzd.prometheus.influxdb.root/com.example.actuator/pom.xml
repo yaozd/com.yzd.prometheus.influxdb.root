@@ -8,10 +8,15 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <name>actuator</name>
+    <name>com.example.actuator</name>
     <description>Demo project for Spring Boot</description>
     <artifactId>com.example.actuator</artifactId>
     <dependencies>
+        <dependency>
+            <groupId>com.yzd</groupId>
+            <artifactId>com.yzd.consul.common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

@@ -1,4 +1,4 @@
-package com.example.actuator;
+package com.example.actuator.config;
 
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.actuate.context.ShutdownEndpoint;

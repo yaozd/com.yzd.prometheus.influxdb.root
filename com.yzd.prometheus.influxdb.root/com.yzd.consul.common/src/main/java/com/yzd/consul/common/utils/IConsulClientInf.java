@@ -13,4 +13,6 @@ public interface IConsulClientInf {
     List<ServiceInfo> getAllHealthyServiceByServiceTag(String serviceTag);
 
     String add(ServiceInfo serviceInfo);
+
+    String delete(String serviceId);
 }
